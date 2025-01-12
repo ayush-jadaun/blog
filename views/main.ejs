@@ -6,25 +6,23 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Write you blog here:</h1>
+    <h1>Write your blog here:</h1>
     <form action="/submit" method="post">
-        <input type = "search" name="Title" placeholder="Title of blog">
-        <input type="text" name="Content" placeholder="Content">
+        <input type="search" name="Title" placeholder="Title of blog" required>
+        <input type="text" name="Content" placeholder="Content" required>
 
         <input type="submit" value="submit">
     </form>
-    <h1>your recent posts</h1>
+
+    <h1>Your recent posts</h1>
     <div>
-        <% if (locals.title,locals.bod) {%>
-            <% for( let i = 0; i < title.length; i++ ) { %>
-            <button><a href="/blog?title=<%= encodeURIComponent(title[i]) %>"><%= title[i] %></a></button>
+        <% if (locals.title && locals.bod && locals.title.length > 0) { %>
+            <% for (let i = 0; i < title.length; i++) { %>
+                <button><a href="/blog?title=<%= encodeURIComponent(title[i]) %>"><%= title[i] %></a></button>
+            <% } %>
+        <% } else { %>
+            <p>No blog is posted yet! Write your first blog</p>
         <% } %>
-        
-        <!-- for loop laga ke har item ko iterate kr do -->
-       <%  }else{ %>
-                <p>No blog is posted yet!Write your first blog</p>
-        <%  }%>
-       
     </div>
 </body>
 </html>

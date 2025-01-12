@@ -6,32 +6,34 @@
     <title>Document</title>
 </head>
 <body>
-    <h1><%= Title %></h1>
-    <form >
-    <textarea name="Content" id="Content"><%= content %></textarea>
-    <button type="button" onclick="()=>// Function for the submit action
-         {
+    <h1><%= Title %></h1> 
+
+    <form>
+        <textarea name="Content" id="Content"><%= content %></textarea>
+        <button type="button" onclick="submitEdit()">Save</button>
+    </form>
+
+    <script>
+        function submitEdit() {
             const content = document.getElementById('Content').value;
-            
-        
-            const requestData = { content};
-        
+            const requestData = { content };
+
             fetch('/edit', {
-                method: 'POST',
+                method: 'PATCH',  // Changed to PATCH for editing
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(requestData)
             })
             .then(response => response.json())
             .then(data => {
                 console.log('Data submitted:', data);
+                // Optionally, show a success message or redirect
+                alert('Post updated successfully!');
             })
             .catch(error => {
                 console.error('Error submitting data:', error);
             });
         }
-        ">Save</button>
-
-</form>
+    </script>
 
 </body>
 </html>
